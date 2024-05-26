@@ -1,5 +1,6 @@
 package cz.uun.companydatabase.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,11 +19,8 @@ import cz.uun.companydatabase.service.CompanyService;
 @RequestMapping("/company")
 public class CompanyController {
 
+    @Autowired
     private CompanyService companyService;
-    
-    public CompanyController() {
-        this.companyService = new CompanyService();
-    }
 
     @PostMapping("")
     public ResponseEntity<Company> createCompany(@RequestBody CompanyCreateDtoIn dtoIn) {
