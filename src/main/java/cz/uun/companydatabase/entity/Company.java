@@ -1,6 +1,6 @@
 package cz.uun.companydatabase.entity;
 
-import java.sql.Date;
+import java.util.Date;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -19,8 +19,13 @@ public class Company {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(unique = true, length = 8)
     private String ico;
+
     private String name;
+
+    @Column(columnDefinition = "TEXT")
     private String address;
 
     @CreationTimestamp
