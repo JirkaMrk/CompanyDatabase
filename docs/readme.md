@@ -91,7 +91,7 @@ Odpověď:
 HTTP status 200 OK
 HTTP status 404 NOT FOUND
 
-### 4.4. - POST /company/{ico}
+### 4.4. - PUT /company/{ico}
 
 Edituje firmu vstupními daty podle ICO.
 
