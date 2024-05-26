@@ -20,7 +20,6 @@ public class CompanyService {
         Company company = new Company();
         company.setName(dtoIn.getName());
         company.setAddress(dtoIn.getAddress());
-        company.setPhoneNumber(dtoIn.getPhoneNumber());
         company.setIco(dtoIn.getIco());
         return companyRepository.save(company);
     }
@@ -46,7 +45,6 @@ public class CompanyService {
             Company company = companyOptional.get();
             company.setName(dtoIn.getName());
             company.setAddress(dtoIn.getAddress());
-            company.setPhoneNumber(dtoIn.getPhoneNumber());
             company.setIco(dtoIn.getIco());
             return companyRepository.save(company);
         }

@@ -1,9 +1,17 @@
 package cz.uun.companydatabase.entity;
 
+import java.sql.Date;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
 @Entity
 public class Company {
@@ -11,18 +19,37 @@ public class Company {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String ico;
     private String name;
     private String address;
-    private String phoneNumber;
-    private String ico; // Přidané pole
 
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private Date createdAt;
+    
+    @UpdateTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "updated_at", nullable = false)
+    private Date updatedAt;
+    
+    
     // Getters and Setters
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getIco() {
+        return ico;
+    }
+
+    public void setIco(String ico) {
+        this.ico = ico;
     }
 
     public String getName() {
@@ -41,19 +68,19 @@ public class Company {
         this.address = address;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
-    public String getIco() {
-        return ico;
+    public Date getUpdatedAt() {
+        return updatedAt;
     }
 
-    public void setIco(String ico) {
-        this.ico = ico;
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }
