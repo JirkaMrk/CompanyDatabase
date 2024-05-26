@@ -129,7 +129,6 @@ Tělo requestu:
 
 ```json
 {
-  "id": 2344776445375356,
   "ico": "23469247",
   "name": "Ne Tak Super Firma s.r.o.",
   "adress": "Praha - Nové Město, Česko"
