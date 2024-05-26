@@ -12,6 +12,7 @@ import cz.uun.companydatabase.dtoin.AresResponseDto;
 import cz.uun.companydatabase.entity.Company;
 import cz.uun.companydatabase.repository.CompanyRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -34,6 +35,11 @@ public class CompanyService {
     public Company getCompanyByIco(String ico) {
         Optional<Company> companyOptional = companyRepository.findByIco(ico);
         return companyOptional.orElse(null);
+    }
+
+    public List<Company> searchCompanyByName(String name) {
+        List<Company> companyList = companyRepository.findByNameContaining(name);
+        return companyList;
     }
 
     public Company deleteCompanyByIco(String ico) {

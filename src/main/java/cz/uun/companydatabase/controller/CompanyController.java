@@ -1,5 +1,7 @@
 package cz.uun.companydatabase.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +13,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import cz.uun.companydatabase.dtoin.CompanyCreateDtoIn;
+import cz.uun.companydatabase.dtoin.CompanySearchByNameDtoIn;
 import cz.uun.companydatabase.dtoin.CompanyUpdateDtoIn;
 import cz.uun.companydatabase.entity.Company;
 import cz.uun.companydatabase.service.CompanyService;
@@ -43,6 +47,12 @@ public class CompanyController {
         } else {
             return ResponseEntity.ok(company);
         }
+    }
+
+    @PostMapping("/searchByName")
+    public ResponseEntity<List<Company>> searchCompanyByName(@RequestBody CompanySearchByNameDtoIn dtoIn) {
+        List<Company> companyList = companyService.searchCompanyByName(dtoIn.getName());
+        return !companyList.isEmpty() ? new ResponseEntity<>(companyList, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @DeleteMapping("/{ico}")

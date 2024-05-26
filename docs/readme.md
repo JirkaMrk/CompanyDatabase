@@ -39,9 +39,7 @@ Tělo requestu:
 {
   "ico": "23469247",
   "name": "Super Firma s.r.o.",
-  "adress": "Praha - Nové Město, Česko",
-  "created": "2024-05-21 09:48:33",
-  "updated": "2024-05-21 09:48:33"
+  "adress": "Praha - Nové Město, Česko"
 }
 ```
 
@@ -69,7 +67,37 @@ Odpověď:
 HTTP status 200 OK
 HTTP status 404 NOT FOUND
 
-### 4.3. - DELETE /company/{ico}
+### 4.3. - POST /company/searchByName
+
+Vyhledá firmu podle jejího názvu
+
+Tělo requestu:
+
+```json
+{
+  "name": "Super"
+}
+```
+
+Odpověď:
+
+```json
+[
+  {
+    "id": 2344776445375356,
+    "ico": "23469247",
+    "name": "Super Firma s.r.o.",
+    "adress": "Praha - Nové Město, Česko",
+    "created": "2024-05-21 09:48:33",
+    "updated": "2024-05-24 23:12:56"
+  }
+]
+```
+
+HTTP status 200 OK
+HTTP status 404 NOT FOUND
+
+### 4.4. - DELETE /company/{ico}
 
 Smaže firmu z databáze podle ICO.
 
@@ -91,7 +119,7 @@ Odpověď:
 HTTP status 200 OK
 HTTP status 404 NOT FOUND
 
-### 4.4. - PUT /company/{ico}
+### 4.5. - PUT /company/{ico}
 
 Edituje firmu vstupními daty podle ICO.
 
@@ -124,7 +152,7 @@ Odpověď:
 HTTP status 200 OK
 HTTP status 404 NOT FOUND
 
-### 4.5. - EXTERNÍ - GET /ekonomicke-subjekty-vr/{ico} - (ARES API)
+### 4.6. - EXTERNÍ - GET /ekonomicke-subjekty-vr/{ico} - (ARES API)
 
 - API URL [https://ares.gov.cz/ekonomicke-subjekty-v-be/rest/ekonomicke-subjekty-vr/](https://ares.gov.cz/ekonomicke-subjekty-v-be/rest/ekonomicke-subjekty-vr/25194798)
 - Lze otestovat za pomocí curl:
