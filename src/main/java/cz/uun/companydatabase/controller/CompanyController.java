@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import cz.uun.companydatabase.dtoin.CompanyCreateDtoIn;
-import cz.uun.companydatabase.model.CompanyModel;
+import cz.uun.companydatabase.entity.Company;
 import cz.uun.companydatabase.service.CompanyService;
 
 @RestController
@@ -22,8 +22,8 @@ public class CompanyController {
     }
 
     @PostMapping("")
-    public ResponseEntity<CompanyModel> create(@RequestBody CompanyCreateDtoIn dtoIn) {
-        CompanyModel company = companyService.create(dtoIn);
+    public ResponseEntity<Company> create(@RequestBody CompanyCreateDtoIn dtoIn) {
+        Company company = companyService.create(dtoIn);
         return new ResponseEntity<>(company, HttpStatus.CREATED);
     }
 }
