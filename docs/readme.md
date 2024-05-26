@@ -143,16 +143,16 @@ Zpátky se získává JSON obsahující veškerá data o firmě podle ICO.
 CREATE TABLE Company (
 id SERIAL PRIMARY KEY,
 ico VARCHAR(8) UNIQUE NOT NULL,
-název VARCHAR(255) NOT NULL,
-adresa TEXT NOT NULL,
-vytvořeno TIMESTAMP DEFAULT NOW(),
-aktualizováno TIMESTAMP DEFAULT NOW()
+name VARCHAR(255) NOT NULL,
+adress TEXT NOT NULL,
+created TIMESTAMP DEFAULT NOW(),
+updated TIMESTAMP DEFAULT NOW()
 );
 
 CREATE TABLE AuditLog (
 id SERIAL PRIMARY KEY,
-akce VARCHAR(50),
-firma_id INTEGER REFERENCES Firma(id),
+action VARCHAR(50),
+company_id INTEGER REFERENCES Firma(id),
 timestamp TIMESTAMP DEFAULT NOW()
 );
 ```
