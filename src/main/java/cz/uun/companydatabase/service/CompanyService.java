@@ -3,6 +3,8 @@ package cz.uun.companydatabase.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
+import org.springframework.http.ResponseEntity;
 
 import cz.uun.companydatabase.dtoin.CompanyCreateDtoIn;
 import cz.uun.companydatabase.dtoin.CompanyUpdateDtoIn;
@@ -56,8 +58,17 @@ public class CompanyService {
         return null;
     }
     
-    public Company getCompanyByIcoFromAres(String url){
-        AresResponseDto aresResponse = restTemplate.getForObject(url, AresResponseDto.class);
+    public Company getCompanyByIcoFromAres(String ico) {
+        String url = UriComponentsBuilder.fromHttpUrl("https://ares.gov.cz/ekonomicke-subjekty-v-be/rest/ekonomicke-subjekty-vr/{ico}")
+                .buildAndExpand(ico)
+                .toUriString();
+        ResponseEntity<AresResponseDto> response = restTemplate.getForEntity(url, AresResponseDto.class);
+        if (response != null && response.getBody() != null) {
+            AresResponseDto aresData = response.getBody();
+            Company company = new Company();
+            company.setIco(aresData.getIco());
+            return company;
+        }
         return null;
-    } 
+    }
 }
