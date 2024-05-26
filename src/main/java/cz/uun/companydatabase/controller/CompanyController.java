@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import cz.uun.companydatabase.dtoin.CompanyCreateDtoIn;
 import cz.uun.companydatabase.dtoin.CompanyUpdateDtoIn;
 import cz.uun.companydatabase.entity.Company;
