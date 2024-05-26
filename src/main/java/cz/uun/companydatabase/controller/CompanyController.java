@@ -32,7 +32,17 @@ public class CompanyController {
     @GetMapping("/{ico}")
     public ResponseEntity<Company> getCompanyByIco(@PathVariable String ico) {
         Company company = companyService.getCompanyByIco(ico);
-        return company != null ? new ResponseEntity<>(company, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        if (company == null) {
+            try {
+                String url = "https://ares.gov.cz/ekonomicke-subjekty-v-be/rest/ekonomicke-subjekty-vr/" + ico;
+                ResponseEntity<Company> response = ResponseEntity.ok(companyService.getCompanyByIcoFromAres(url));
+                return response != null ? response : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            } catch (Exception e) {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        } else {
+            return ResponseEntity.ok(company);
+        }
     }
 
     @DeleteMapping("/{ico}")
