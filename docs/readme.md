@@ -31,7 +31,100 @@ Databáze bude vytvořena v PostgreSQL a bude obsahovat následující tabulky:
 
 ## 4. Endpoints (API)
 
-### 4.1. - GET /ekonomicke-subjekty-vr/{ico} - (ARES API)
+### 4.1. - POST /company
+
+Tělo requestu:
+
+```json
+{
+  "ico": "23469247",
+  "name": "Super Firma s.r.o.",
+  "adress": "Praha - Nové Město, Česko",
+  "created": "2024-05-21 09:48:33",
+  "updated": "2024-05-21 09:48:33"
+}
+```
+
+HTTP status 201 CREATED
+
+### 4.2. - GET /company/{ico}
+
+Získá firmu z databáze podle ICO.
+
+Path proměnná - ico (varchar(8))
+
+Odpověď:
+
+```json
+{
+  "id": 2344776445375356,
+  "ico": "23469247",
+  "name": "Super Firma s.r.o.",
+  "adress": "Praha - Nové Město, Česko",
+  "created": "2024-05-21 09:48:33",
+  "updated": "2024-05-24 23:12:56"
+}
+```
+
+HTTP status 200 OK
+HTTP status 404 NOT FOUND
+
+### 4.3. - DELETE /company/{ico}
+
+Smaže firmu z databáze podle ICO.
+
+Path proměnná - ico (varchar(8))
+
+Odpověď:
+
+```json
+{
+  "id": 2344776445375356,
+  "ico": "23469247",
+  "name": "Super Firma s.r.o.",
+  "adress": "Praha - Nové Město, Česko",
+  "created": "2024-05-21 09:48:33",
+  "updated": "2024-05-24 23:12:56"
+}
+```
+
+HTTP status 200 OK
+HTTP status 404 NOT FOUND
+
+### 4.4. - POST /company/{ico}
+
+Edituje firmu vstupními daty podle ICO.
+
+Path proměnná - ico (varchar(8))
+
+Tělo requestu:
+
+```json
+{
+  "id": 2344776445375356,
+  "ico": "23469247",
+  "name": "Ne Tak Super Firma s.r.o.",
+  "adress": "Praha - Nové Město, Česko"
+}
+```
+
+Odpověď:
+
+```json
+{
+  "id": 2344776445375356,
+  "ico": "23469247",
+  "name": "Ne Tak Super Firma s.r.o.",
+  "adress": "Praha - Nové Město, Česko",
+  "created": "2024-05-21 09:48:33",
+  "updated": "2024-05-26 15:34:21"
+}
+```
+
+HTTP status 200 OK
+HTTP status 404 NOT FOUND
+
+### 4.5. - EXTERNÍ - GET /ekonomicke-subjekty-vr/{ico} - (ARES API)
 
 - API URL [https://ares.gov.cz/ekonomicke-subjekty-v-be/rest/ekonomicke-subjekty-vr/](https://ares.gov.cz/ekonomicke-subjekty-v-be/rest/ekonomicke-subjekty-vr/25194798)
 - Lze otestovat za pomocí curl:
@@ -43,80 +136,6 @@ curl -X 'GET' \
 ```
 
 Zpátky se získává JSON obsahující veškerá data o firmě podle ICO.
-
-### 4.2. - POST /company
-
-Tělo requestu:
-
-- id: 2344776445375356
-- ico: "23469247"
-- name: "Super Firma s.r.o."
-- adress: "Praha - Nové Město, Česko"
-- created: 2024-05-21 09:48:33
-- updated: 2024-05-21 09:48:33
-
-HTTP status 201 CREATED
-
-### 4.3. - GET /company/{ico}
-
-Získá firmu z databáze podle ICO.
-
-Path proměnná - ico (varchar(8))
-
-Odpověď:
-
-- id: 2344776445375356
-- ico: "23469247"
-- name: "Super Firma s.r.o."
-- adress: "Praha - Nové Město, Česko"
-- created: 2024-05-21 09:48:33
-- updated: 2024-05-24 23:12:56
-
-HTTP status 200 OK
-HTTP status 404 NOT FOUND
-
-### 4.4. - DELETE /company/{ico}
-
-Smaže firmu z databáze podle ICO.
-
-Path proměnná - ico (varchar(8))
-
-Odpověď:
-
-- id: 2344776445375356
-- ico: "23469247"
-- name: "Super Firma s.r.o."
-- adress: "Praha - Nové Město, Česko"
-- created: 2024-05-21 09:48:33
-- updated: 2024-05-24 23:12:56
-
-HTTP status 200 OK
-HTTP status 404 NOT FOUND
-
-### 4.5. - POST /company/{ico}
-
-Edituje firmu vstupními daty podle ICO.
-
-Path proměnná - ico (varchar(8))
-
-Tělo requestu:
-
-- id: 2344776445375356
-- ico: "23469247"
-- name: "Ne Tak Super Firma s.r.o."
-- adress: "Praha - Nové Město, Česko"
-
-Odpověď:
-
-- id: 2344776445375356
-- ico: "23469247"
-- name: "Ne Tak Super Firma s.r.o."
-- adress: "Praha - Nové Město, Česko"
-- created: 2024-05-21 09:48:33
-- updated: 2024-05-26 15:34:21
-
-HTTP status 200 OK
-HTTP status 404 NOT FOUND
 
 ## 5. Detailní Datový Model
 
